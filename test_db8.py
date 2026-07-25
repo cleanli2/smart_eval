@@ -49,6 +49,7 @@ def ask_llama_stream(prompt_text: str) -> str:
         timeout=180
     )
     resp.raise_for_status()
+    resp.encoding = 'utf-8'
 
     for line in resp.iter_lines(decode_unicode=True):
         if not line:
