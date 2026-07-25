@@ -3,7 +3,7 @@
     "id": 1,
     "category": "Logic",
     "question": "如果所有 A 都是 B，且所有 B 都是 C，那么所有 A 必然是 C 吗？",
-    "options": {"A": "是的", "B": "不是", "C": "不确定"},
+    "options": {"A": "是的", "B": "不是", "C": "不确定", "D": "无法判断"},
     "answer": "A"
   },
   {
@@ -12,6 +12,691 @@
     "question": "甲说：‘乙在撒谎’；乙说：‘丙在撒谎’；丙说：‘甲和乙都在撒谎’。请问谁在说真话？",
     "options": {"A": "甲", "B": "乙", "C": "丙", "D": "没有人说真话"},
     "answer": "B"
+  },
+  {
+    "id": 3,
+    "category": "Logic",
+    "question": "已知：如果下雨，地面就会湿。现在地面是湿的，那么一定下雨了吗？",
+    "options": {"A": "是的", "B": "不是", "C": "不确定", "D": "无法判断"},
+    "answer": "B"
+  },
+  {
+    "id": 4,
+    "category": "Logic",
+    "question": "在一个岛上，岛民分为‘诚实者’（永远说真话）和‘谎言者’（永远说假话）。你遇到一个人，他向你保证说：‘我是一个谎言者’。这个人是谁？",
+    "options": {"A": "诚实者", "B": "谎言者", "C": "这是一个悖论，不可能发生", "D": "无法判断"},
+    "answer": "C"
+  },
+  {
+    "id": 5,
+    "category": "Logic",
+    "question": "五个人参加比赛，小明排在小红后面，但排在小刚前面。小强排在第一名，小刚排在小丽后面。请问第三名是谁？",
+    "options": {"A": "小明", "B": "小红", "C": "小刚", "D": "小丽"},
+    "answer": "A"
+  },
+  {
+    "id": 6,
+    "category": "Logic",
+    "question": "如果‘只要努力就能成功’这句话的逆否命题是正确的，那么以下哪个表述一定正确？",
+    "options": {"A": "不努力就不能成功", "B": "成功了就一定努力了", "C": "没有成功就一定没有努力", "D": "努力了也不一定成功"},
+    "answer": "C"
+  },
+  {
+    "id": 7,
+    "category": "Logic",
+    "question": "有三个盒子，一个装金币，两个装银币。每个盒子上都有标签，但所有标签都是错的。盒子A标‘金币’，盒子B标‘银币’，盒子C标‘金币或银币’。如果你从盒子C中拿出一个硬币是金币，那么盒子B里装的是什么？",
+    "options": {"A": "金币", "B": "银币", "C": "金银混装", "D": "无法确定"},
+    "answer": "B"
+  },
+  {
+    "id": 8,
+    "category": "Logic",
+    "question": "一个球从10米高处落下，每次反弹高度是原高度的一半。请问球在第几次反弹后，高度将低于0.1米？",
+    "options": {"A": "6次", "B": "7次", "C": "8次", "D": "9次"},
+    "answer": "B"
+  },
+  {
+    "id": 9,
+    "category": "Logic",
+    "question": "如果今天不是星期一，那么明天就是星期二。那么这句话的逻辑等价表述是：",
+    "options": {"A": "今天是星期一，或者明天是星期二", "B": "今天是星期一，且明天不是星期二", "C": "只要明天不是星期二，今天就是星期一", "D": "以上都不对"},
+    "answer": "A"
+  },
+  {
+    "id": 10,
+    "category": "Logic",
+    "question": "在某个国家，所有人要么是‘真话者’要么是‘假话者’。你问一个人：‘你是真话者吗？’，他回答：‘是的’。由此你可以得出什么结论？",
+    "options": {"A": "他是真话者", "B": "他是假话者", "C": "他可能是两者中的任何一个", "D": "他不是这个国家的人"},
+    "answer": "C"
+  },
+  {
+    "id": 11,
+    "category": "Logic",
+    "question": "所有的人类都是会死的，苏格拉底是人类，所以苏格拉底会死。这属于哪种逻辑推理？",
+    "options": {"A": "归纳法", "B": "演绎法", "C": "类比法", "D": "演绎推理中的逆推"},
+    "answer": "B"
+  },
+  {
+    "id": 12,
+    "category": "Logic",
+    "question": "如果 A > B 且 B > C，那么 A 和 C 的关系是？",
+    "options": {"A": "A < C", "B": "A = C", "C": "A > C", "D": "无法确定"},
+    "answer": "C"
+  },
+  {
+    "id": 13,
+    "category": "Logic",
+    "question": "一个家庭有三个孩子，已知其中至少有一个是女孩，那么另外两个孩子也都是女孩的概率是多少？",
+    "options": {"A": "1/4", "B": "1/8", "C": "1/7", "D": "1/3"},
+    "answer": "C"
+  },
+  {
+    "id": 14,
+    "category": "Logic",
+    "question": "如果‘所有鱼都能游泳’为假，那么以下哪个命题一定为真？",
+    "options": {"A": "没有鱼能游泳", "B": "至少有一种鱼不能游泳", "C": "所有的鱼都不能游泳", "D": "游泳的生物都不是鱼"},
+    "answer": "B"
+  },
+  {
+    "id": 15,
+    "category": "Logic",
+    "question": "已知 A 蕴含 B，且 B 为假。那么关于 A 的结论是？",
+    "options": {"A": "A 为真", "B": "A 为假", "C": "A 不确定", "D": "逻辑矛盾"},
+    "answer": "B"
+  },
+  {
+    "id": 16,
+    "category": "Logic",
+    "question": "一个房间里有 4 个角落，每个角落有一只猫，每只猫面对 3 只猫。请问房间里共有几只猫？",
+    "options": {"A": "3只", "B": "4只", "C": "12只", "D": "16只"},
+    "answer": "B"
+  },
+  {
+    "id": 17,
+    "category": "Logic",
+    "question": "如果‘只有通过努力才能成功’，那么‘不努力’会导致什么？",
+    "options": {"A": "一定不成功", "B": "可能成功", "C": "不一定不成功", "D": "无法判断"},
+    "answer": "A"
+  },
+  {
+    "id": 18,
+    "category": "Logic",
+    "question": "甲、乙、丙三人中只有一人是凶手。甲说：‘凶手是乙’；乙说：‘凶手是丙’；丙说：‘乙在撒谎’。已知只有一个人说了真话，那么谁是凶手？",
+    "options": {"A": "甲", "B": "乙", "C": "丙", "D": "无法判断"},
+    "answer": "A"
+  },
+  {
+    "id": 19,
+    "category": "Logic",
+    "question": "如果所有的矩形都是平行四边形，且所有的正方形都是矩形，那么所有正方形都是平行四边形吗？",
+    "options": {"A": "是的", "B": "不是", "C": "不确定", "D": "无法判断"},
+    "answer": "A"
+  },
+  {
+    "id": 20,
+    "category": "Logic",
+    "question": "一个悖论：‘这句话是谎话’。如果这句话是真的，那么它就是假的；如果它是假的，那么它就是真的。这种现象叫什么？",
+    "options": {"A": "循环论证", "B": "自指悖论", "C": "逻辑谬误", "D": "归纳失效"},
+    "answer": "B"
+  },
+  {
+    "id": 21,
+    "category": "Mathematics",
+    "question": "一个圆的半径增加 50%，那么它的面积增加了百分之多少？",
+    "options": {"A": "50%", "B": "100%", "C": "125%", "D": "225%"},
+    "answer": "C"
+  },
+  {
+    "id": 22,
+    "category": "Mathematics",
+    "question": "方程 2x + 5 = 13 的解是多少？",
+    "options": {"A": "3", "B": "4", "C": "5", "D": "6"},
+    "answer": "B"
+  },
+  {
+    "id": 23,
+    "category": "Mathematics",
+    "question": "如果一个正方体的体积是 64 立方厘米，那么它的表面积是多少平方厘米？",
+    "options": {"A": "64", "B": "96", "C": "128", "D": "16"},
+    "answer": "B"
+  },
+  {
+    "id": 24,
+    "category": "Mathematics",
+    "question": "连续三个整数的和是 45，那么这三个数中最大的那个数是多少？",
+    "options": {"A": "14", "B": "15", "C": "16", "D": "17"},
+    "answer": "C"
+  },
+  {
+    "id": 25,
+    "category": "Mathematics",
+    "question": "在一个班级中，男生人数是女生人数的 3/2，如果全班共有 35 人，那么男生有多少人？",
+    "options": {"A": "15", "B": "20", "C": "21", "D": "25"},
+    "answer": "B"
+  },
+  {
+    "id": 26,
+    "category": "Mathematics",
+    "question": "一个正三角形的边长为 6，那么它的高是多少？",
+    "options": {"A": "3", "B": "3√2", "C": "3√3", "D": "6√3"},
+    "answer": "C"
+  },
+  {
+    "id": 27,
+    "category": "Mathematics",
+    "question": "已知 x^2 - 4 = 0，那么 x 的所有可能取值之和是多少？",
+    "options": {"A": "2", "B": "-2", "C": "0", "D": "4"},
+    "answer": "C"
+  },
+  {
+    "id": 28,
+    "category": "Mathematics",
+    "question": "如果 3^x = 81，那么 x 的值是多少？",
+    "options": {"A": "3", "B": "4", "C": "5", "D": "6"},
+    "answer": "B"
+  },
+  {
+    "id": 29,
+    "category": "Mathematics",
+    "question": "一个商品原价 100 元，先打八折，再在八折的基础上打九折，最终售价是多少？",
+    "options": {"A": "70元", "B": "72元", "C": "80元", "D": "75元"},
+    "answer": "B"
+  },
+  {
+    "id": 30,
+    "category": "Mathematics",
+    "question": "在直角三角形中，已知两条直角边分别为 3 和 4，那么斜边的长度是多少？",
+    "options": {"A": "5", "B": "6", "C": "7", "D": "√7"},
+    "answer": "A"
+  },
+  {
+    "id": 31,
+    "category": "Mathematics",
+    "question": "计算：(2^3 * 2^4) / 2^5 = ?",
+    "options": {"A": "2", "B": "4", "C": "8", "D": "16"},
+    "answer": "B"
+  },
+  {
+    "id": 32,
+    "category": "Mathematics",
+    "question": "一个时钟在 3 点 15 分时，时针与分针的夹角是多少度？",
+    "options": {"A": "0度", "B": "7.5度", "C": "15度", "D": "22.5度"},
+    "answer": "B"
+  },
+  {
+    "id": 33,
+    "category": "Mathematics",
+    "question": "已知 a + b = 5, ab = 6，那么 a^2 + b^2 的值是多少？",
+    "options": {"A": "11", "B": "13", "C": "15", "D": "25"},
+    "answer": "B"
+  },
+  {
+    "id": 34,
+    "category": "Mathematics",
+    "question": "如果一个概率事件 A 发生的概率是 0.3，那么事件 A 不发生的概率是多少？",
+    "options": {"A": "0.3", "B": "0.5", "C": "0.7", "D": "1.0"},
+    "answer": "C"
+  },
+  {
+    "id": 35,
+    "category": "Mathematics",
+    "question": "一个圆柱体的底面积为 10π，高为 5，那么它的体积是多少？",
+    "options": {"A": "15π", "B": "50π", "C": "100π", "D": "50"},
+    "answer": "B"
+  },
+  {
+    "id": 36,
+    "category": "Mathematics",
+    "question": "数列 2, 6, 12, 20, 30, ... 的下一个数字是多少？",
+    "options": {"A": "40", "B": "42", "C": "44", "D": "46"},
+    "answer": "B"
+  },
+  {
+    "id": 37,
+    "category": "Mathematics",
+    "question": "若 log2(x) = 5，则 x 的值是多少？",
+    "options": {"A": "10", "B": "25", "C": "32", "D": "64"},
+    "answer": "C"
+  },
+  {
+    "id": 38,
+    "category": "Mathematics",
+    "question": "一个正八边形的内角和是多少度？",
+    "options": {"A": "1080度", "B": "900度", "C": "1260度", "D": "1440度"},
+    "answer": "A"
+  },
+  {
+    "id": 39,
+    "category": "Mathematics",
+    "question": "已知 f(x) = 3x - 2，那么 f(f(2)) 的值是多少？",
+    "options": {"A": "4", "B": "7", "C": "10", "D": "13"},
+    "answer": "C"
+  },
+  {
+    "id": 40,
+    "category": "Mathematics",
+    "question": "两个数之比为 3:5，如果它们的和是 80，那么较小的那个数是多少？",
+    "options": {"A": "30", "B": "50", "C": "40", "D": "20"},
+    "answer": "A"
+  },
+  {
+    "id": 41,
+    "category": "General Knowledge",
+    "question": "世界上最长的河流是哪一条？",
+    "options": {"A": "亚马逊河", "B": "尼罗河", "C": "长江", "D": "密西西比河"},
+    "answer": "B"
+  },
+  {
+    "id": 42,
+    "category": "General Knowledge",
+    "question": "化学元素周期表中，符号为 'Au' 的元素是什么？",
+    "options": {"A": "银", "B": "铜", "C": "金", "D": "铝"},
+    "answer": "C"
+  },
+  {
+    "id": 43,
+    "category": "General Knowledge",
+    "question": "文艺复兴时期著名的《蒙娜丽莎》是由谁创作的？",
+    "options": {"A": "米开朗基罗", "B": "拉斐尔", "C": "达芬奇", "D": "多纳泰罗"},
+    "answer": "C"
+  },
+  {
+    "id": 44,
+    "category": "General Knowledge",
+    "question": "人类历史上第一个登陆月球的人是谁？",
+    "options": {"A": "巴兹·奥尔德林", "B": "尼尔·阿姆斯特朗", "C": "尤里·加加林", "D": "迈克尔·柯林斯"},
+    "answer": "B"
+  },
+  {
+    "id": 45,
+    "category": "General Knowledge",
+    "question": "哪个国家是世界上国土面积最大的国家？",
+    "options": {"A": "加拿大", "B": "中国", "C": "美国", "D": "俄罗斯"},
+    "answer": "D"
+  },
+  {
+    "id": 46,
+    "category": "General Knowledge",
+    "question": "在物理学中，光的传播速度大约是多少？",
+    "options": {"A": "30万公里/秒", "B": "3万公里/秒", "C": "300公里/秒", "D": "15万公里/秒"},
+    "answer": "A"
+  },
+  {
+    "id": 47,
+    "category": "General Knowledge",
+    "question": "著名的‘金字塔’主要分布在哪个国家的沙漠中？",
+    "options": {"A": "墨西哥", "B": "埃及", "C": "伊拉克", "D": "伊朗"},
+    "answer": "B"
+  },
+  {
+    "id": 48,
+    "category": "General Knowledge",
+    "question": "人体中最大的器官是什么？",
+    "options": {"A": "肝脏", "B": "肺", "C": "皮肤", "D": "心脏"},
+    "answer": "C"
+  },
+  {
+    "id": 49,
+    "category": "General Knowledge",
+    "question": "第二次世界大战结束于哪一年？",
+    "options": {"A": "1943", "B": "1944", "C": "1945", "D": "1946"},
+    "answer": "C"
+  },
+  {
+    "id": 50,
+    "category": "General Knowledge",
+    "question": "哪个气体在地球大气中占比最高？",
+    "options": {"A": "氧气", "B": "二氧化碳", "C": "氮气", "D": "氩气"},
+    "answer": "C"
+  },
+  {
+    "id": 51,
+    "category": "General Knowledge",
+    "question": "著名的‘大堡礁’位于哪个国家附近？",
+    "options": {"A": "新西兰", "B": "澳大利亚", "C": "印度尼西亚", "D": "菲律宾"},
+    "answer": "B"
+  },
+  {
+    "id": 52,
+    "category": "General Knowledge",
+    "question": "谁被公认为现代计算机之父？",
+    "options": {"A": "比尔·盖茨", "B": "艾伦·图灵", "C": "史蒂夫·乔布斯", "D": "克劳德·香农"},
+    "answer": "B"
+  },
+  {
+    "id": 53,
+    "category": "General Knowledge",
+    "question": "太阳系中最大的行星是哪一颗？",
+    "options": {"A": "土星", "B": "天王星", "C": "海王星", "D": "木星"},
+    "answer": "D"
+  },
+  {
+    "id": 54,
+    "category": "General Knowledge",
+    "question": "中国的‘故宫’在哪个城市？",
+    "options": {"A": "西安", "B": "南京", "C": "北京", "D": "杭州"},
+    "answer": "C"
+  },
+  {
+    "id": 55,
+    "category": "General Knowledge",
+    "question": "DNA 分子的结构是什么形状？",
+    "options": {"A": "单链", "B": "双螺旋", "C": "球形", "D": "环形"},
+    "answer": "B"
+  },
+  {
+    "id": 56,
+    "category": "General Knowledge",
+    "question": "哪位物理学家提出了相对论？",
+    "options": {"A": "牛顿", "B": "玻尔", "C": "爱因斯坦", "D": "普朗克"},
+    "answer": "C"
+  },
+  {
+    "id": 57,
+    "category": "General Knowledge",
+    "question": "世界上最深的海沟是哪个？",
+    "options": {"A": "爪哇海沟", "B": "马里亚纳海沟", "C": "汤加海沟", "D": "菲律宾海沟"},
+    "answer": "B"
+  },
+  {
+    "id": 58,
+    "category": "General Knowledge",
+    "question": "工业革命最早起源于哪个国家？",
+    "options": {"A": "法国", "B": "美国", "C": "德国", "D": "英国"},
+    "answer": "D"
+  },
+  {
+    "id": 59,
+    "category": "General Knowledge",
+    "question": "哪种维生素是由阳光照射皮肤而产生的？",
+    "options": {"A": "维生素 A", "B": "维生素 B", "C": "维生素 C", "D": "维生素 D"},
+    "answer": "D"
+  },
+  {
+    "id": 60,
+    "category": "General Knowledge",
+    "question": "‘文艺复兴’主要起源于欧洲的哪个城市？",
+    "options": {"A": "巴黎", "B": "伦敦", "C": "佛罗伦萨", "D": "马德里"},
+    "answer": "C"
+  },
+  {
+    "id": 61,
+    "category": "Language",
+    "question": "‘他真是个天才，居然能把这么简单的事情搞砸。’这句话表达的主要情感是：",
+    "options": {"A": "赞美", "B": "讽刺", "C": "惊讶", "D": "同情"},
+    "answer": "B"
+  },
+  {
+    "id": 62,
+    "category": "Language",
+    "question": "成语‘破釜沉舟’比喻：",
+    "options": {"A": "做事鲁莽", "B": "绝不回头，决心战斗", "C": "由于失误导致失败", "D": "采取迂回战术"},
+    "answer": "B"
+  },
+  {
+    "id": 63,
+    "category": "Language",
+    "question": "‘尽管天上下起了大雨，但比赛依然照常进行。’这句话中的‘尽管’起到了什么作用？",
+    "options": {"A": "递进关系", "B": "因果关系", "C": "转折关系", "D": "条件关系"},
+    "answer": "C"
+  },
+  {
+    "id": 64,
+    "category": "Language",
+    "question": "下列哪个词语最适合填入空白：‘面对如此艰巨的任务，他感到压力山大，但依然____地坚持了下来。’",
+    "options": {"A": "勉强", "B": "顽强", "C": "勉强", "D": "匆忙"},
+    "answer": "B"
+  },
+  {
+    "id": 65,
+    "category": "Language",
+    "question": "‘这件衣服的价格贵得离谱’。这句话中‘离谱’的近义词是：",
+    "options": {"A": "合理", "B": "极端", "C": "离奇", "D": "夸张"},
+    "answer": "C"
+  },
+  {
+    "id": 66,
+    "category": "Language",
+    "question": "在句子‘他是一个很随和的人’中，‘随和’的意思是：",
+    "options": {"A": "性格温顺，容易相处", "B": "没有主见，随波逐流", "C": "做事慢条斯理", "D": "对人过于客气"},
+    "answer": "A"
+  },
+  {
+    "id": 67,
+    "category": "Language",
+    "question": "‘他不仅会说英语，还会说法语和德语。’这句话强调的是：",
+    "options": {"A": "他不懂中文", "B": "他会多种语言", "C": "法语比英语难", "D": "他学习能力差"},
+    "answer": "B"
+  },
+  {
+    "id": 68,
+    "category": "Language",
+    "question": "下列哪个成语描述的是‘极其微小’？",
+    "options": {"A": "微不足道", "B": "微言大义", "C": "微乎其微", "D": "上述所有"},
+    "answer": "D"
+  },
+  {
+    "id": 69,
+    "category": "Language",
+    "question": "‘这个计划虽然完美，但缺乏可行性。’这句话的核心观点是：",
+    "options": {"A": "计划非常完美", "B": "计划不能实施", "C": "计划需要修改", "D": "可行性比完美重要"},
+    "answer": "B"
+  },
+  {
+    "id": 70,
+    "category": "Language",
+    "question": "‘他说话总是点到为止’。这里的‘点到为止’意味着：",
+    "options": {"A": "说话不完整", "B": "说话含糊不清", "C": "在恰当的时候停止，不穷追猛打", "D": "说话非常直接"},
+    "answer": "C"
+  },
+  {
+    "id": 71,
+    "category": "Language",
+    "question": "‘他面无表情’这句话最可能暗示：",
+    "options": {"A": "他非常高兴", "B": "他掩饰了自己的情感", "C": "他失去了意识", "D": "他在大笑"},
+    "answer": "B"
+  },
+  {
+    "id": 72,
+    "category": "Language",
+    "question": "‘他的观点令人哑口无言’。这句话通常意味着：",
+    "options": {"A": "对方观点太烂", "B": "对方观点非常有说服力", "C": "对方在胡言乱语", "D": "对方没有说话"},
+    "answer": "B"
+  },
+  {
+    "id": 73,
+    "category": "Language",
+    "question": "‘即使是这样，我也愿意尝试。’这句话表达了一种什么样的态度？",
+    "options": {"A": "犹豫不决", "B": "坚决地尝试", "C": "勉强接受", "D": "完全绝望"},
+    "answer": "B"
+  },
+  {
+    "id": 74,
+    "category": "Language",
+    "question": "下列哪个词语在语义上最接近‘执拗’？",
+    "options": {"A": "倔强", "B": "灵活", "C": "温柔", "D": "顺从"},
+    "answer": "A"
+  },
+  {
+    "id": 75,
+    "category": "Language",
+    "question": "‘他说话的方式非常委婉’。这意味着他：",
+    "options": {"A": "说话很慢", "B": "说话不直接，比较客气", "C": "说话声音很小", "D": "说话逻辑混乱"},
+    "answer": "B"
+  },
+  {
+    "id": 76,
+    "category": "Language",
+    "question": "‘此地无银三百两’这个成语用来比喻：",
+    "options": {"A": "非常富有", "B": "掩饰得不自然，反而暴露了真相", "C": "贪婪成性", "D": "由于贫穷而绝望"},
+    "answer": "B"
+  },
+  {
+    "id": 77,
+    "category": "Language",
+    "question": "‘他对他的人生充满期待’。这句话中的‘期待’通常带有：",
+    "options": {"A": "负面情绪", "B": "正面情绪", "C": "中性情绪", "D": "焦虑情绪"},
+    "answer": "B"
+  },
+  {
+    "id": 78,
+    "category": "Language",
+    "question": "‘他只是在开玩笑’这句话在争吵中出现时，通常起什么作用？",
+    "options": {"A": "升级冲突", "B": "缓解气氛/逃避责任", "C": "承认错误", "D": "请求原谅"},
+    "answer": "B"
+  },
+  {
+    "id": 79,
+    "category": "Language",
+    "question": "‘他对此事不屑一顾’。‘不屑一顾’意味着：",
+    "options": {"A": "非常关注", "B": "觉得不值得一看", "C": "感到非常害怕", "D": "非常好奇"},
+    "answer": "B"
+  },
+  {
+    "id": 80,
+    "category": "Language",
+    "question": "‘这种做法简直是画蛇添足’。这句话的意思是：",
+    "options": {"A": "做得非常完美", "B": "做了多余的事，反而弄巧成拙", "C": "做事缺乏计划", "D": "效率极其低下"},
+    "answer": "B"
+  },
+  {
+    "id": 81,
+    "category": "Coding",
+    "question": "在 Python 中，如果执行 'print(type([]))'，输出结果是什么？",
+    "options": {"A": "<class 'tuple'>", "B": "<class 'set'>", "C": "<class 'list'>", "D": "<class 'dict'>"},
+    "answer": "C"
+  },
+  {
+    "id": 82,
+    "category": "Coding",
+    "question": "快排 (Quick Sort) 在最坏情况下的时间复杂度是多少？",
+    "options": {"A": "O(n)", "B": "O(n log n)", "C": "O(n^2)", "D": "O(2^n)"},
+    "answer": "C"
+  },
+  {
+    "id": 83,
+    "category": "Coding",
+    "question": "在二叉搜索树 (BST) 中，对节点进行哪种遍历可以得到一个有序序列？",
+    "options": {"A": "先序遍历", "B": "后序遍历", "C": "层序遍历", "D": "中序遍历"},
+    "answer": "D"
+  },
+  {
+    "id": 84,
+    "category": "Coding",
+    "question": "下列哪个数据结构遵循 '后进先出' (LIFO) 原则？",
+    "options": {"A": "队列 (Queue)", "B": "栈 (Stack)", "C": "链表 (Linked List)", "D": "堆 (Heap)"},
+    "answer": "B"
+  },
+  {
+    "id": 85,
+    "category": "Coding",
+    "question": "在 C 语言中，指针变量存储的是什么？",
+    "options": {"A": "变量的值", "B": "变量的类型", "C": "变量的内存地址", "D": "变量的名称"},
+    "answer": "C"
+  },
+  {
+    "id": 86,
+    "category": "Coding",
+    "question": "如果一个函数通过递归调用自身，且没有正确的终止条件，会导致什么结果？",
+    "options": {"A": "死循环但内存稳定", "B": "堆栈溢出 (Stack Overflow)", "C": "编译器报错", "D": "程序运行速度加快"},
+    "answer": "B"
+  },
+  {
+    "id": 87,
+    "category": "Coding",
+    "question": "在 HTTP 协议中，状态码 404 代表什么？",
+    "options": {"A": "服务器内部错误", "B": "未授权", "C": "未找到资源", "D": "请求成功"},
+    "answer": "C"
+  },
+  {
+    "id": 88,
+    "category": "Coding",
+    "question": "SQL 语句中，用于去除查询结果中重复记录的关键字是？",
+    "options": {"A": "UNIQUE", "B": "DISTINCT", "C": "GROUP BY", "D": "ORDER BY"},
+    "answer": "B"
+  },
+  {
+    "id": 89,
+    "category": "Coding",
+    "question": "在 Python 中，'set' 类型的主要特点是什么？",
+    "options": {"A": "元素有序", "B": "允许重复元素", "C": "元素唯一且无序", "D": "只能存储整数"},
+    "answer": "C"
+  },
+  {
+    "id": 90,
+    "category": "Coding",
+    "question": "关于时间复杂度，以下哪个排序算法在所有情况下的时间复杂度都是 O(n log n)？",
+    "options": {"A": "冒泡排序", "B": "快速排序", "C": "归并排序", "D": "插入排序"},
+    "answer": "C"
+  },
+  {
+    "id": 91,
+    "category": "Coding",
+    "question": "在 Java 中，'final' 关键字修饰类时，意味着：",
+    "options": {"A": "该类不能被实例化", "B": "该类不能被继承", "C": "该类所有方法必须是静态的", "D": "该类只能在同一个包中使用"},
+    "answer": "B"
+  },
+  {
+    "id": 92,
+    "category": "Coding",
+    "question": "一个哈希表 (Hash Table) 在发生哈希冲突时，常用的解决办法不包括：",
+    "options": {"A": "链地址法", "B": "开放寻址法", "C": "重新启动程序", "D": "双哈希法"},
+    "answer": "C"
+  },
+  {
+    "id": 93,
+    "category": "Coding",
+    "question": "在 Git 版本控制中，将远程仓库的更改合并到本地仓库的命令是？",
+    "options": {"A": "git push", "B": "git commit", "C": "git pull", "D": "git add"},
+    "answer": "C"
+  },
+  {
+    "id": 94,
+    "category": "Coding",
+    "question": "下列哪个是面向对象编程 (OOP) 的核心特性？",
+    "options": {"A": "递归", "B": "多态", "C": "编译", "D": "序列化"},
+    "answer": "B"
+  },
+  {
+    "id": 95,
+    "category": "Coding",
+    "question": "在二进制中，10110 转换为十进制是多少？",
+    "options": {"A": "20", "B": "22", "C": "24", "D": "26"},
+    "answer": "B"
+  },
+  {
+    "id": 96,
+    "category": "Coding",
+    "question": "JSON 格式的数据结构主要由哪两种形式组成？",
+    "options": {"A": "数组和对象", "B": "列表和元组", "C": "字符串和整数", "D": "键和值"},
+    "answer": "A"
+  },
+  {
+    "id": 97,
+    "category": "Coding",
+    "question": "在 Python 中，'__init__' 方法的作用是？",
+    "options": {"A": "定义类的方法", "B": "初始化类实例", "C": "销毁对象", "D": "导入外部模块"},
+    "answer": "B"
+  },
+  {
+    "id": 98,
+    "category": "Coding",
+    "question": "关于 O(1) 时间复杂度，下列描述正确的是？",
+    "options": {"A": "执行时间随输入规模线性增长", "B": "执行时间与输入规模无关", "C": "执行时间呈指数级增长", "D": "执行时间是 logn 级别"},
+    "answer": "B"
+  },
+  {
+    "id": 99,
+    "category": "Coding",
+    "question": "在 TCP/IP 模型中，负责确保数据可靠传输的层是？",
+    "options": {"A": "物理层", "B": "网络层", "C": "传输层", "D": "应用层"},
+    "answer": "C"
+  },
+  {
+    "id": 100,
+    "category": "Coding",
+    "question": "下列哪个是对 Python 装饰器 (Decorator) 最准确的描述？",
+    "options": {"A": "一种用于定义类的特殊语法", "B": "一种在不修改原函数代码的情况下增强其功能的函数", "C": "一种用于加速循环运行的工具", "D": "一种用于内存回收的机制"},
+    "answer": "B"
   }
 ]
-
