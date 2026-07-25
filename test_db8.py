@@ -8,7 +8,6 @@ from datetime import datetime
 LLAMA_SERVER_URL = "http://127.0.0.1:8080/completion"
 QUESTION_BANK_PATH = "question_bank.json"
 TOTAL_SCORE = 100
-MAX_OUTPUT_TOKENS = 32
 # ==================================================================
 
 def get_safe_model_name() -> str:
@@ -35,10 +34,11 @@ def ask_llama_stream(prompt_text: str) -> str:
     payload = {
         "prompt": prompt_text,
         "temperature": 0.0,
-        "max_tokens": MAX_OUTPUT_TOKENS,
-        "stream": True
+        "stream": True,
+        "repeat_penalty": 1.3,
+        "repeat_last_n": 16
     }
-    headers = {"Content-Type": "application/json"}
+    headers = {"Content-Type": "application/json; charset=utf-8"}
     full_output = ""
 
     resp = requests.post(
@@ -77,12 +77,12 @@ def extract_answer_letter(raw_text: str) -> str:
     return fallback_match.group(0) if fallback_match else ""
 
 def build_single_question_prompt(q_data: dict) -> str:
-    """Construct standardized prompt for single exam question, force fixed answer format"""
+    """Construct standardized prompt"""
     q_text = q_data["question"]
     opt_lines = "\n".join([f"{k}: {v}" for k, v in q_data["options"].items()])
-    prompt = f"""Solve this logic question.
-You must output your final answer strictly in fixed format: [Answer]#X
-Replace X with single uppercase letter A/B/C/D. No extra text, no reasoning, no extra explanation.
+    prompt = f"""Answer this question by choose correct option. Answer after thinking.
+Rule: Output final answer with fixed format and stop immediately: [Answer]#X
+Replace X with A/B/C/D. No extra words, no Chinese description, no repeated text.
 
 Question: {q_text}
 Options:
