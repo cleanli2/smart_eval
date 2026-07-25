@@ -8,6 +8,7 @@ from datetime import datetime
 LLAMA_SERVER_URL = "http://127.0.0.1:8080/completion"
 QUESTION_BANK_PATH = "question_bank.json"
 TOTAL_SCORE = 100
+MAX_OUTPUT_TOKENS = 1000
 # ==================================================================
 
 def get_safe_model_name() -> str:
@@ -34,6 +35,7 @@ def ask_llama_stream(prompt_text: str) -> str:
     payload = {
         "prompt": prompt_text,
         "temperature": 0.0,
+        "max_tokens": MAX_OUTPUT_TOKENS,
         "stream": True,
         "repeat_penalty": 1.3,
         "repeat_last_n": 16
@@ -81,7 +83,8 @@ def build_single_question_prompt(q_data: dict) -> str:
     """Construct standardized prompt"""
     q_text = q_data["question"]
     opt_lines = "\n".join([f"{k}: {v}" for k, v in q_data["options"].items()])
-    prompt = f"""Answer this question by choose correct option. Answer after thinking.
+    prompt = f"""Answer this question by choose correct option. Answer after fully thinking.
+Tokens of thinking must less than 1000 tokens before sending out answer or you will lost this question.
 Rule: Output final answer with fixed format and stop immediately: [Answer]#X
 Replace X with A/B/C/D. No extra words, no Chinese description, no repeated text.
 
