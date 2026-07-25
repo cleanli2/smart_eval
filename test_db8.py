@@ -8,7 +8,7 @@ from datetime import datetime
 LLAMA_SERVER_URL = "http://127.0.0.1:8080/completion"
 QUESTION_BANK_PATH = "question_bank.json"
 TOTAL_SCORE = 100
-MAX_OUTPUT_TOKENS = 16
+MAX_OUTPUT_TOKENS = 32
 # ==================================================================
 
 def get_safe_model_name() -> str:
@@ -68,16 +68,21 @@ def ask_llama_stream(prompt_text: str) -> str:
     return full_output
 
 def extract_answer_letter(raw_text: str) -> str:
-    """Extract single uppercase ABCD letter from model output"""
-    match = re.search(r"[ABCD]", raw_text)
-    return match.group(0) if match else ""
+    """Extract single uppercase ABCD letter from model output, match format [Answer]#X"""
+    match = re.search(r"\[Answer\]#([ABCD])", raw_text)
+    if match:
+        return match.group(1)
+    # Fallback: extract any ABCD if format missing
+    fallback_match = re.search(r"[ABCD]", raw_text)
+    return fallback_match.group(0) if fallback_match else ""
 
 def build_single_question_prompt(q_data: dict) -> str:
-    """Construct standardized prompt for single exam question"""
+    """Construct standardized prompt for single exam question, force fixed answer format"""
     q_text = q_data["question"]
     opt_lines = "\n".join([f"{k}: {v}" for k, v in q_data["options"].items()])
     prompt = f"""Solve this logic question.
-At the end, only output one uppercase letter (A/B/C/D) as your answer, no extra text, no reasoning.
+You must output your final answer strictly in fixed format: [Answer]#X
+Replace X with single uppercase letter A/B/C/D. No extra text, no reasoning, no extra explanation.
 
 Question: {q_text}
 Options:
@@ -87,12 +92,16 @@ Answer:"""
     return prompt
 
 def main():
-    # Step 1: Get model name for log file
+    # Step 1: Get model name and timestamp for log file
     model_name = get_safe_model_name()
+    # Generate compact datetime string: YYYYMMDD_HHMMSS
+    run_datetime = datetime.now().strftime("%Y%m%d_%H%M%S")
+    run_time_human = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
     log_storage = []
-    run_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     log_storage.append(f"Evaluation Model: {model_name}")
-    log_storage.append(f"Evaluation Time: {run_time}")
+    log_storage.append(f"Evaluation Time: {run_time_human}")
+    log_storage.append(f"File Creation Timestamp: {run_datetime}")
 
     # Step 2: Load all exam questions
     question_list = load_question_bank(QUESTION_BANK_PATH)
@@ -159,8 +168,8 @@ Final Score (Full Mark 100): {final_score:.2f}
     print(summary_text)
     log_storage.append(summary_text)
 
-    # Step5: Save log to result file
-    output_filename = f"result_{model_name}.txt"
+    # Step5: Save log to result file with timestamp
+    output_filename = f"result_{model_name}_{run_datetime}.txt"
     with open(output_filename, "w", encoding="utf-8") as f:
         f.write("\n".join(log_storage))
     print(f"Full evaluation log saved to file: {output_filename}")
