@@ -127,8 +127,8 @@ def main():
         for opt_k, opt_v in q["options"].items():
             print(f"  {opt_k}: {opt_v}")
         print(f"Standard Answer: {std_answer}")
-        print("\nPrompt Sent To LLM:")
-        print(prompt)
+        #print("\nPrompt Sent To LLM:")
+        #print(prompt)
         print("\nStreaming Model Output:")
 
         # Request stream answer from llama
