@@ -83,7 +83,7 @@ def build_single_question_prompt(q_data: dict) -> str:
     opt_lines = "\n".join([f"{k}: {v}" for k, v in q_data["options"].items()])
     prompt = f"""Answer this question by choose correct option. Answer after thinking.
 Rule: Output final answer with fixed format and stop immediately: [Answer]#X
-Replace X with A/B/C/D. No extra words, no Chinese description, no repeated text.
+Replace X with A/B/C/D.
 
 Question: {q_text}
 Options:
