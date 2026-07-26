@@ -8,6 +8,7 @@ from datetime import datetime
 LLAMA_SERVER_URL = "http://127.0.0.1:8080/completion"
 QUESTION_BANK_PATH = "question_bank.json"
 TOTAL_SCORE = 100
+MAX_OUTPUT_TOKENS = 1000
 # ==================================================================
 
 def get_safe_model_name() -> str:
@@ -35,11 +36,12 @@ def ask_llama_stream(prompt_text: str) -> str:
         "prompt": prompt_text,
         "temperature": 0.0,
         "stream": True,
-        "repeat_penalty": 1.3,
-        "repeat_last_n": 16
+        "repeat_penalty": 1.1,
+        "repeat_last_n": 32
     }
     headers = {"Content-Type": "application/json; charset=utf-8"}
     full_output = ""
+    token_count = 0
 
     resp = requests.post(
         LLAMA_SERVER_URL,
@@ -64,6 +66,10 @@ def ask_llama_stream(prompt_text: str) -> str:
                 if token_text:
                     print(token_text, end="", flush=True)
                     full_output += token_text
+                    token_count += 1
+                    if token_count >= MAX_OUTPUT_TOKENS:
+                        print("\n[System: Max tokens reached, forcing stop]")
+                        break
             except json.JSONDecodeError:
                 continue
     return full_output
