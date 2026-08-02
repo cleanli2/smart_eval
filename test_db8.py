@@ -8,7 +8,7 @@ from datetime import datetime
 LLAMA_SERVER_URL = "http://127.0.0.1:8080/completion"
 QUESTION_BANK_PATH = "question_bank.json"
 TOTAL_SCORE = 100
-MAX_OUTPUT_TOKENS = 1200
+MAX_OUTPUT_TOKENS = 4096
 # ==================================================================
 
 def get_safe_model_name() -> str:
@@ -36,6 +36,7 @@ def ask_llama_stream(prompt_text: str) -> str:
         "prompt": prompt_text,
         "temperature": 0.0,
         "stream": True,
+        "n_predict": 4096,
         "repeat_penalty": 1.1,
         "repeat_last_n": 32
     }
