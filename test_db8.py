@@ -5,7 +5,8 @@ import os
 from datetime import datetime
 
 # ===================== CONFIGURATION AREA =====================
-LLAMA_SERVER_URL = "http://127.0.0.1:8080/completion"
+#LLAMA_SERVER_URL = "http://127.0.0.1:8080/completion"
+LLAMA_SERVER_URL = "http://127.0.0.1:8080/v1/chat/completions"
 QUESTION_BANK_PATH = "question_bank.json"
 TOTAL_SCORE = 100
 MAX_OUTPUT_TOKENS = 4096
@@ -33,47 +34,75 @@ def load_question_bank(file_path: str) -> list:
 def ask_llama_stream(prompt_text: str) -> str:
     """Send prompt to llama-server stream api, return full response string"""
     payload = {
-        "prompt": prompt_text,
+        "messages": [
+            {
+                "role": "user",
+                "content": prompt_text
+            }
+        ],
         "temperature": 0.0,
         "stream": True,
-        "n_predict": 4096,
         "repeat_penalty": 1.1,
-        "repeat_last_n": 32
+        "repeat_last_n": 32,
+        "max_tokens": 4096
     }
     headers = {"Content-Type": "application/json; charset=utf-8"}
     full_output = ""
     token_count = 0
 
-    resp = requests.post(
-        LLAMA_SERVER_URL,
-        json=payload,
-        headers=headers,
-        stream=True,
-        timeout=180
-    )
-    resp.raise_for_status()
-    resp.encoding = 'utf-8'
+    try:
+        resp = requests.post(
+            LLAMA_SERVER_URL,
+            json=payload,
+            headers=headers,
+            stream=True,
+            timeout=180
+        )
+        resp.raise_for_status()
+        resp.encoding = 'utf-8'
 
-    for line in resp.iter_lines(decode_unicode=True):
-        if not line:
-            continue
-        if line.startswith("data: "):
-            raw_data = line.removeprefix("data: ")
-            if raw_data == "[DONE]":
-                break
-            try:
-                chunk_json = json.loads(raw_data)
-                token_text = chunk_json.get("content", "")
-                if token_text:
-                    print(token_text, end="", flush=True)
-                    full_output += token_text
-                    token_count += 1
-                    if token_count >= MAX_OUTPUT_TOKENS:
-                        print("\n[System: Max tokens reached, forcing stop]")
-                        break
-            except json.JSONDecodeError:
+        for line in resp.iter_lines(decode_unicode=True):
+            if not line:
                 continue
+
+            # 1. handler "data: " prefix
+            if line.startswith("data: "):
+                raw_data = line.removeprefix("data: ")
+
+                # 2. handler end
+                if raw_data.strip() == "[DONE]":
+                    break
+
+                try:
+                    chunk_json = json.loads(raw_data)
+
+                    # get content according OPENAI structure
+                    # path: choices -> [0] -> delta -> content
+                    choices = chunk_json.get("choices", [])
+                    if not choices:
+                        continue
+
+                    delta = choices[0].get("delta", {})
+                    token_text = delta.get("content", "") # get real text
+
+                    if token_text:
+                        print(token_text, end="", flush=True)
+                        full_output += token_text
+                        token_count += 1
+
+                        if token_count >= MAX_OUTPUT_TOKENS:
+                            print("\n[System: Max tokens reached, forcing stop]")
+                            break
+
+                except json.JSONDecodeError:
+                    continue
+
+    except requests.exceptions.RequestException as e:
+        print(f"\n[System: Request Error] {e}")
+        return ""
+
     return full_output
+
 
 def extract_answer_letter(raw_text: str) -> str:
     """Extract single uppercase ABCD letter from model output, match format [Answer]#X"""
@@ -88,9 +117,11 @@ def build_single_question_prompt(q_data: dict) -> str:
     """Construct standardized prompt"""
     q_text = q_data["question"]
     opt_lines = "\n".join([f"{k}: {v}" for k, v in q_data["options"].items()])
-    prompt = f"""Answer this question by choose correct option. Answer after thinking.
-Rule: Output final answer with fixed format and stop immediately: [Answer]#X
-Replace X with A/B/C/D.
+    prompt = f"""Task: Solve the following multiple-choice question.
+Requirements:
+Reasoning Process: First, perform a detailed step-by-step analysis of the problem. Place your entire reasoning process inside <thought> and </thought> tags. Be thorough but avoid unnecessary repetition.
+Final Answer: After the reasoning process, you must provide the final answer in the exact format: [Answer]#X (where X is only the single letter A, B, C, or D).
+Constraint: Do not include any conversational filler, introductory remarks, or concluding sentences. Only provide the <thought> block and the [Answer]#X line.
 
 Question: {q_text}
 Options:
