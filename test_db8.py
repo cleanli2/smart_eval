@@ -1,4 +1,5 @@
 import requests
+import time
 import argparse
 import json
 import re
@@ -171,6 +172,7 @@ def main():
     log_storage.append(f"Total Questions: {total_question_count}, Full Mark: 100, Points per question: {score_per_question:.2f}")
     log_storage.append("=" * 80 + "\n")
 
+    start_time = time.time()
     print(f"===== Start Evaluation | Model: {model_name} | Total {total_question_count} Questions =====\n")
     correct_count = 0
 
@@ -215,10 +217,12 @@ def main():
         log_storage.append(f"Extracted Model Answer: {model_answer}")
         log_storage.append(f"Answer Correct: {is_correct}\n")
 
+    total_duration = time.time() - start_time
     # Step4: Calculate final score
     final_score = correct_count * score_per_question
     summary_text = f"""
 ==================== EVALUATION SUMMARY ====================
+Total Test Time: {total_duration:.2f} seconds ({total_duration/60:.2f} minutes)
 Total Test Questions: {total_question_count}
 Correct Count: {correct_count}
 Wrong Count: {total_question_count - correct_count}
