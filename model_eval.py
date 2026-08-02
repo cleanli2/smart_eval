@@ -234,7 +234,13 @@ Final Score (Full Mark 100): {final_score:.2f}
     log_storage.append(summary_text)
 
     # Step5: Save log to result file with timestamp
-    output_filename = f"result_{model_name}_{run_datetime}.txt"
+    dir_path = "results_dir"
+
+    if not os.path.exists(dir_path):
+        output_filename = f"result_{model_name}_{run_datetime}.txt"
+    else:
+        output_filename = f"results_dir/result_{model_name}_{run_datetime}.txt"
+
     with open(output_filename, "w", encoding="utf-8") as f:
         f.write("\n".join(log_storage))
     print(f"Full evaluation log saved to file: {output_filename}")
