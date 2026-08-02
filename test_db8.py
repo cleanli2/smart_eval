@@ -45,7 +45,7 @@ def ask_llama_stream(prompt_text: str) -> str:
         ],
         "temperature": 0.0,
         "stream": True,
-        "repeat_penalty": 1.3,
+        "repeat_penalty": 1.1,
         "repeat_last_n": 32,
         "max_tokens": MAX_OUTPUT_TOKENS
     }
