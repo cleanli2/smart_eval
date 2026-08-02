@@ -9,7 +9,7 @@ from datetime import datetime
 LLAMA_SERVER_URL = "http://127.0.0.1:8080/v1/chat/completions"
 QUESTION_BANK_PATH = "question_bank.json"
 TOTAL_SCORE = 100
-MAX_OUTPUT_TOKENS = 4096
+MAX_OUTPUT_TOKENS = 8192
 # ==================================================================
 
 def get_safe_model_name() -> str:
@@ -32,7 +32,10 @@ def load_question_bank(file_path: str) -> list:
     return data
 
 def ask_llama_stream(prompt_text: str) -> str:
-    """Send prompt to llama-server stream api, return full response string"""
+    """
+    send Prompt to llama-server Chat API, support stream
+    get reasoning_content and content
+    """
     payload = {
         "messages": [
             {
@@ -42,10 +45,11 @@ def ask_llama_stream(prompt_text: str) -> str:
         ],
         "temperature": 0.0,
         "stream": True,
-        "repeat_penalty": 1.1,
+        "repeat_penalty": 1.3,
         "repeat_last_n": 32,
-        "max_tokens": 4096
+        "max_tokens": MAX_OUTPUT_TOKENS
     }
+
     headers = {"Content-Type": "application/json; charset=utf-8"}
     full_output = ""
     token_count = 0
@@ -65,44 +69,47 @@ def ask_llama_stream(prompt_text: str) -> str:
             if not line:
                 continue
 
-            # 1. handler "data: " prefix
             if line.startswith("data: "):
-                raw_data = line.removeprefix("data: ")
+                raw_data = line.removeprefix("data: ").strip()
 
-                # 2. handler end
-                if raw_data.strip() == "[DONE]":
+                if raw_data == "[DONE]":
                     break
 
                 try:
                     chunk_json = json.loads(raw_data)
-
-                    # get content according OPENAI structure
-                    # path: choices -> [0] -> delta -> content
                     choices = chunk_json.get("choices", [])
                     if not choices:
                         continue
 
                     delta = choices[0].get("delta", {})
-                    token_text = delta.get("content", "") # get real text
 
-                    if token_text:
-                        print(token_text, end="", flush=True)
-                        full_output += token_text
+                    reasoning = delta.get("reasoning_content")
+                    content = delta.get("content")
+
+                    if reasoning is not None:
+                        print(f"\033[90m{reasoning}\033[0m", end="", flush=True)
+                        full_output += reasoning
+                        token_count += 1
+                    elif content is not None:
+                        print(content, end="", flush=True)
+                        full_output += content
                         token_count += 1
 
-                        if token_count >= MAX_OUTPUT_TOKENS:
-                            print("\n[System: Max tokens reached, forcing stop]")
-                            break
+                    if token_count >= MAX_OUTPUT_TOKENS:
+                        print("\n\033[31m[System: Max tokens reached, forcing stop]\033[0m")
+                        break
 
                 except json.JSONDecodeError:
                     continue
 
     except requests.exceptions.RequestException as e:
-        print(f"\n[System: Request Error] {e}")
+        print(f"\n\033[31m[System: Network Error] {e}\033[0m")
+        return ""
+    except Exception as e:
+        print(f"\n\033[31m[System: Unexpected Error] {e}\033[0m")
         return ""
 
     return full_output
-
 
 def extract_answer_letter(raw_text: str) -> str:
     """Extract single uppercase ABCD letter from model output, match format [Answer]#X"""
