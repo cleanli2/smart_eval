@@ -126,9 +126,8 @@ def build_single_question_prompt(q_data: dict) -> str:
     opt_lines = "\n".join([f"{k}: {v}" for k, v in q_data["options"].items()])
     prompt = f"""Task: Solve the following multiple-choice question.
 Requirements:
-Reasoning Process: First, perform a detailed step-by-step analysis of the problem. Place your entire reasoning process inside <thought> and </thought> tags. Be thorough but avoid unnecessary repetition.
-Final Answer: After the reasoning process, you must provide the final answer in the exact format: [Answer]#X (where X is only the single letter A, B, C, or D).
-Constraint: Do not include any conversational filler, introductory remarks, or concluding sentences. Only provide the <thought> block and the [Answer]#X line.
+You must provide the final answer in the exact format: [Answer]#X (where X is only the single letter A, B, C, or D).
+Constraint: Do not include any conversational filler, introductory remarks, or concluding sentences. Only provide the [Answer]#X line.
 
 Question: {q_text}
 Options:
