@@ -8,7 +8,7 @@ from datetime import datetime
 LLAMA_SERVER_URL = "http://127.0.0.1:8080/completion"
 QUESTION_BANK_PATH = "question_bank.json"
 TOTAL_SCORE = 100
-MAX_OUTPUT_TOKENS = 1000
+MAX_OUTPUT_TOKENS = 1200
 # ==================================================================
 
 def get_safe_model_name() -> str:
