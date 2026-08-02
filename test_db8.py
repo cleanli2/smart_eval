@@ -1,4 +1,5 @@
 import requests
+import argparse
 import json
 import re
 import os
@@ -8,6 +9,7 @@ from datetime import datetime
 #LLAMA_SERVER_URL = "http://127.0.0.1:8080/completion"
 LLAMA_SERVER_URL = "http://127.0.0.1:8080/v1/chat/completions"
 QUESTION_BANK_PATH = "question_bank.json"
+QUESTION_RAPID_BANK_PATH = "question_rapid_bank.json"
 TOTAL_SCORE = 100
 MAX_OUTPUT_TOKENS = 18192
 # ==================================================================
@@ -116,9 +118,8 @@ def extract_answer_letter(raw_text: str) -> str:
     match = re.search(r"\[Answer\]#([ABCD])", raw_text)
     if match:
         return match.group(1)
-    # Fallback: extract any ABCD if format missing
-    fallback_match = re.search(r"[ABCD]", raw_text)
-    return fallback_match.group(0) if fallback_match else ""
+    else:
+        return ""
 
 def build_single_question_prompt(q_data: dict) -> str:
     """Construct standardized prompt"""
@@ -137,6 +138,21 @@ Answer:"""
     return prompt
 
 def main():
+    # get para
+    parser = argparse.ArgumentParser(description="Model Intelligence Test")
+    # add --rapid para，action="store_true"
+    parser.add_argument("--rapid", action="store_true", help="Use the rapid question bank for faster testing")
+
+    args = parser.parse_args()
+
+    if args.rapid:
+        current_bank_path = QUESTION_RAPID_BANK_PATH
+        print(f"🚀 Rapid mode enabled. Loading: {current_bank_path}")
+    else:
+        current_bank_path = QUESTION_BANK_PATH
+        print(f"📚 Standard mode enabled. Loading: {current_bank_path}")
+
+
     # Step 1: Get model name and timestamp for log file
     model_name = get_safe_model_name()
     # Generate compact datetime string: YYYYMMDD_HHMMSS
@@ -149,7 +165,7 @@ def main():
     log_storage.append(f"File Creation Timestamp: {run_datetime}")
 
     # Step 2: Load all exam questions
-    question_list = load_question_bank(QUESTION_BANK_PATH)
+    question_list = load_question_bank(current_bank_path)
     total_question_count = len(question_list)
     score_per_question = TOTAL_SCORE / total_question_count
     log_storage.append(f"Total Questions: {total_question_count}, Full Mark: 100, Points per question: {score_per_question:.2f}")
