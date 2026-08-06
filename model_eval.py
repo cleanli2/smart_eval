@@ -14,6 +14,7 @@ QUESTION_RAPID_BANK_PATH = "question_rapid_bank.json"
 TOTAL_SCORE = 100
 MAX_OUTPUT_TOKENS = 18192
 API_KEY = "none"
+MODELNAME = "gemma-4-31b-it-4bit"
 # ==================================================================
 
 def get_safe_model_name() -> str:
@@ -41,7 +42,7 @@ def ask_llama_stream(prompt_text: str) -> str:
     get reasoning_content and content
     """
     payload = {
-        "model": "gemma-4-31b-it-4bit",
+        "model": MODELNAME,
         "messages": [
             {
                 "role": "user",
@@ -148,6 +149,7 @@ def main():
     parser = argparse.ArgumentParser(description="Model Intelligence Test")
     # add --rapid para，action="store_true"
     parser.add_argument("--rapid", action="store_true", help="Use the rapid question bank for faster testing")
+    parser.add_argument("--mname", action="store_true", help="specify model name for testing")
 
     args = parser.parse_args()
 
@@ -158,10 +160,12 @@ def main():
         current_bank_path = QUESTION_BANK_PATH
         print(f"📚 Standard mode enabled. Loading: {current_bank_path}")
 
+    if args.mname:
+        MODELNAME = args.mname
 
     # Step 1: Get model name and timestamp for log file
     #model_name = get_safe_model_name()
-    model_name = "unknown"
+    model_name = MODELNAME
     # Generate compact datetime string: YYYYMMDD_HHMMSS
     run_datetime = datetime.now().strftime("%Y%m%d_%H%M%S")
     run_time_human = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
