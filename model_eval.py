@@ -8,16 +8,17 @@ from datetime import datetime
 
 # ===================== CONFIGURATION AREA =====================
 #LLAMA_SERVER_URL = "http://127.0.0.1:8080/completion"
-LLAMA_SERVER_URL = "http://127.0.0.1:8080/v1/chat/completions"
+LLAMA_SERVER_URL = "http://127.0.0.1:8000/v1/chat/completions"
 QUESTION_BANK_PATH = "question_bank.json"
 QUESTION_RAPID_BANK_PATH = "question_rapid_bank.json"
 TOTAL_SCORE = 100
 MAX_OUTPUT_TOKENS = 18192
+API_KEY = "none"
 # ==================================================================
 
 def get_safe_model_name() -> str:
     """Get current loaded model name from llama-server api"""
-    model_info_url = "http://127.0.0.1:8080/v1/models"
+    model_info_url = "http://127.0.0.1:8000/v1/models"
     resp = requests.get(model_info_url, timeout=10)
     resp.raise_for_status()
     data = resp.json()
@@ -40,6 +41,7 @@ def ask_llama_stream(prompt_text: str) -> str:
     get reasoning_content and content
     """
     payload = {
+        "model": "gemma-4-31b-it-4bit",
         "messages": [
             {
                 "role": "user",
@@ -53,7 +55,10 @@ def ask_llama_stream(prompt_text: str) -> str:
         "max_tokens": MAX_OUTPUT_TOKENS
     }
 
-    headers = {"Content-Type": "application/json; charset=utf-8"}
+    headers = {
+        "Content-Type": "application/json; charset=utf-8",
+        "Authorization": f"Bearer {API_KEY}"
+    }
     full_output = ""
     token_count = 0
 
@@ -155,7 +160,8 @@ def main():
 
 
     # Step 1: Get model name and timestamp for log file
-    model_name = get_safe_model_name()
+    #model_name = get_safe_model_name()
+    model_name = "unknown"
     # Generate compact datetime string: YYYYMMDD_HHMMSS
     run_datetime = datetime.now().strftime("%Y%m%d_%H%M%S")
     run_time_human = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
