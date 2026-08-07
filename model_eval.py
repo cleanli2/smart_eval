@@ -14,7 +14,7 @@ QUESTION_RAPID_BANK_PATH = "question_rapid_bank.json"
 TOTAL_SCORE = 100
 MAX_OUTPUT_TOKENS = 18192
 API_KEY = "none"
-MODELNAME = "gemma-4-31b-it-4bit"
+MODELNAME = "gemma-4-26b-a4b-it-4bit"
 # ==================================================================
 
 def get_safe_model_name() -> str:
@@ -41,6 +41,7 @@ def ask_llama_stream(prompt_text: str) -> str:
     send Prompt to llama-server Chat API, support stream
     get reasoning_content and content
     """
+    print(f"-------- {MODELNAME}")
     payload = {
         "model": MODELNAME,
         "messages": [
@@ -145,11 +146,12 @@ Answer:"""
     return prompt
 
 def main():
+    print(f"---2---- {MODELNAME}")
     # get para
     parser = argparse.ArgumentParser(description="Model Intelligence Test")
     # add --rapid para，action="store_true"
     parser.add_argument("--rapid", action="store_true", help="Use the rapid question bank for faster testing")
-    parser.add_argument("--mname", action="store_true", help="specify model name for testing")
+    parser.add_argument('--mname', type=str, help='Name of the model')
 
     args = parser.parse_args()
 
@@ -162,6 +164,9 @@ def main():
 
     if args.mname:
         MODELNAME = args.mname
+        print(f"---j---- {MODELNAME}")
+    else:
+        print(f"---2---- {MODELNAME}")
 
     # Step 1: Get model name and timestamp for log file
     #model_name = get_safe_model_name()
