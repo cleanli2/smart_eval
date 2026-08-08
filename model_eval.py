@@ -146,6 +146,7 @@ Answer:"""
     return prompt
 
 def main():
+    global MODELNAME
     print(f"---2---- {MODELNAME}")
     # get para
     parser = argparse.ArgumentParser(description="Model Intelligence Test")
