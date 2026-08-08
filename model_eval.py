@@ -16,6 +16,19 @@ MAX_OUTPUT_TOKENS = 18192
 API_KEY = "none"
 # ==================================================================
 
+def get_model_name_via_probe() -> str:
+    probe_url = "http://127.0.0.1:8080/v1/completions"
+    payload = {"prompt": "ignore this, just get model name", "max_tokens": 1}
+
+    try:
+        resp = requests.post(probe_url, json=payload, timeout=5)
+        resp.raise_for_status()
+        # get model
+        return resp.json().get("model", "unknown_model")
+    except:
+        return "unknown_model"
+
+
 def get_safe_model_name() -> str:
     """Get current loaded model name from llama-server api"""
     model_info_url = "http://127.0.0.1:8000/v1/models"
@@ -74,6 +87,7 @@ def ask_llama_stream(prompt_text: str) -> str:
             if not line:
                 continue
 
+            #print(f"\n[RAW LINE RECEIVED]: {line}")
             if line.startswith("data: "):
                 raw_data = line.removeprefix("data: ").strip()
 
@@ -88,7 +102,7 @@ def ask_llama_stream(prompt_text: str) -> str:
 
                     delta = choices[0].get("delta", {})
 
-                    reasoning = delta.get("reasoning_content")
+                    reasoning = delta.get("reasoning")
                     content = delta.get("content")
 
                     if reasoning is not None:
@@ -157,8 +171,9 @@ def main():
         print(f"📚 Standard mode enabled. Loading: {current_bank_path}")
 
     # Step 1: Get model name and timestamp for log file
-    #model_name = get_safe_model_name()
-    model_name = "unknown"
+    model_name = get_model_name_via_probe()
+    #model_name = "unknown"
+    print(f"model={model_name}")
     # Generate compact datetime string: YYYYMMDD_HHMMSS
     run_datetime = datetime.now().strftime("%Y%m%d_%H%M%S")
     run_time_human = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
