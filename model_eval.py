@@ -13,6 +13,8 @@ QUESTION_BANK_PATH = "question_bank.json"
 QUESTION_RAPID_BANK_PATH = "question_rapid_bank.json"
 TOTAL_SCORE = 100
 MAX_OUTPUT_TOKENS = 18192
+API_KEY = "none"
+TOKEN_SPEED_COMPUTE_COUNT = 300
 # ==================================================================
 
 def get_safe_model_name() -> str:
@@ -56,6 +58,8 @@ def ask_llama_stream(prompt_text: str) -> str:
     headers = {"Content-Type": "application/json; charset=utf-8"}
     full_output = ""
     token_count = 0
+    speed_cpct = 0
+    speed_cptime = time.time()
 
     try:
         resp = requests.post(
@@ -93,14 +97,25 @@ def ask_llama_stream(prompt_text: str) -> str:
                         print(f"\033[90m{reasoning}\033[0m", end="", flush=True)
                         full_output += reasoning
                         token_count += 1
+                        current_text = reasoning
                     elif content is not None:
                         print(content, end="", flush=True)
                         full_output += content
                         token_count += 1
+                        current_text = content
 
                     if token_count >= MAX_OUTPUT_TOKENS:
                         print("\n\033[31m[System: Max tokens reached, forcing stop]\033[0m")
                         break
+
+                    delta_tokens = token_count-speed_cpct
+                    if delta_tokens > TOKEN_SPEED_COMPUTE_COUNT and ("\n" in current_text or "\r" in current_text):
+                        now = time.time()
+                        duration = now - speed_cptime
+                        speed = delta_tokens / duration
+                        print(f"\033[92m-- statistic: {speed:.1f} t/s, {token_count} tokens --\033[0m\n")
+                        speed_cptime = time.time()
+                        speed_cpct = token_count
 
                 except json.JSONDecodeError:
                     continue
