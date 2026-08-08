@@ -8,13 +8,12 @@ from datetime import datetime
 
 # ===================== CONFIGURATION AREA =====================
 #LLAMA_SERVER_URL = "http://127.0.0.1:8080/completion"
-LLAMA_SERVER_URL = "http://127.0.0.1:8000/v1/chat/completions"
+LLAMA_SERVER_URL = "http://127.0.0.1:8080/v1/chat/completions"
 QUESTION_BANK_PATH = "question_bank.json"
 QUESTION_RAPID_BANK_PATH = "question_rapid_bank.json"
 TOTAL_SCORE = 100
 MAX_OUTPUT_TOKENS = 18192
 API_KEY = "none"
-MODELNAME = "gemma-4-26b-a4b-it-4bit"
 # ==================================================================
 
 def get_safe_model_name() -> str:
@@ -41,9 +40,7 @@ def ask_llama_stream(prompt_text: str) -> str:
     send Prompt to llama-server Chat API, support stream
     get reasoning_content and content
     """
-    print(f"-------- {MODELNAME}")
     payload = {
-        "model": MODELNAME,
         "messages": [
             {
                 "role": "user",
@@ -52,8 +49,6 @@ def ask_llama_stream(prompt_text: str) -> str:
         ],
         "temperature": 0.0,
         "stream": True,
-        "repeat_penalty": 1.1,
-        "repeat_last_n": 32,
         "max_tokens": MAX_OUTPUT_TOKENS
     }
 
@@ -146,8 +141,6 @@ Answer:"""
     return prompt
 
 def main():
-    global MODELNAME
-    print(f"---2---- {MODELNAME}")
     # get para
     parser = argparse.ArgumentParser(description="Model Intelligence Test")
     # add --rapid para，action="store_true"
@@ -163,15 +156,9 @@ def main():
         current_bank_path = QUESTION_BANK_PATH
         print(f"📚 Standard mode enabled. Loading: {current_bank_path}")
 
-    if args.mname:
-        MODELNAME = args.mname
-        print(f"---j---- {MODELNAME}")
-    else:
-        print(f"---2---- {MODELNAME}")
-
     # Step 1: Get model name and timestamp for log file
     #model_name = get_safe_model_name()
-    model_name = MODELNAME
+    model_name = "unknown"
     # Generate compact datetime string: YYYYMMDD_HHMMSS
     run_datetime = datetime.now().strftime("%Y%m%d_%H%M%S")
     run_time_human = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
