@@ -90,7 +90,7 @@ def ask_llama_stream(prompt_text: str) -> str:
 
                     delta = choices[0].get("delta", {})
 
-                    reasoning = delta.get("reasoning_content")
+                    reasoning = delta.get("reasoning")
                     content = delta.get("content")
 
                     if reasoning is not None:
@@ -145,6 +145,7 @@ def build_single_question_prompt(q_data: dict) -> str:
 Requirements:
 You must provide the final answer in the exact format: [Answer]#X (where X is only the single letter A, B, C, or D).
 Constraint: Do not include any conversational filler, introductory remarks, or concluding sentences. Only provide the [Answer]#X line.
+Constraint:Please maintain high reasoning density while remaining concise. You are limited to 10,000 tokens; excessive verbosity in the reasoning process may lead to premature truncation and failure of the task. Focus on the critical logical steps.
 
 Question: {q_text}
 Options:
