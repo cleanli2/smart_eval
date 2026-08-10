@@ -15,7 +15,7 @@ QUESTION_RAPID_BANK_PATH2 = "question_rapid_bank2.json"
 TOTAL_SCORE = 100
 MAX_OUTPUT_TOKENS = 18192
 API_KEY = "none"
-TOKEN_SPEED_COMPUTE_COUNT = 100
+TOKEN_SPEED_COMPUTE_COUNT = 50
 # ==================================================================
 
 def get_safe_model_name() -> str:
