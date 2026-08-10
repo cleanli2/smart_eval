@@ -11,10 +11,11 @@ from datetime import datetime
 LLAMA_SERVER_URL = "http://127.0.0.1:8080/v1/chat/completions"
 QUESTION_BANK_PATH = "question_bank.json"
 QUESTION_RAPID_BANK_PATH = "question_rapid_bank.json"
+QUESTION_RAPID_BANK_PATH2 = "question_rapid_bank2.json"
 TOTAL_SCORE = 100
 MAX_OUTPUT_TOKENS = 18192
 API_KEY = "none"
-TOKEN_SPEED_COMPUTE_COUNT = 300
+TOKEN_SPEED_COMPUTE_COUNT = 100
 # ==================================================================
 
 def get_safe_model_name() -> str:
@@ -158,12 +159,15 @@ def main():
     # get para
     parser = argparse.ArgumentParser(description="Model Intelligence Test")
     # add --rapid para，action="store_true"
-    parser.add_argument("--rapid", action="store_true", help="Use the rapid question bank for faster testing")
+    parser.add_argument("--rapid", type=int, help="Use the rapid question bank for faster testing")
 
     args = parser.parse_args()
 
-    if args.rapid:
+    if args.rapid == 1:
         current_bank_path = QUESTION_RAPID_BANK_PATH
+        print(f"🚀 Rapid mode enabled. Loading: {current_bank_path}")
+    elif args.rapid == 2:
+        current_bank_path = QUESTION_RAPID_BANK_PATH2
         print(f"🚀 Rapid mode enabled. Loading: {current_bank_path}")
     else:
         current_bank_path = QUESTION_BANK_PATH
